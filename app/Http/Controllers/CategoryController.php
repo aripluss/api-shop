@@ -21,5 +21,31 @@ class CategoryController extends Controller
         // }
         // return response()->json($category->products); // повертає масив з товарами
     }
+
+
+    public function addCategory(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255'
+        ]);
+
+        $category = Category::create($validated);
+
+        return response()->json($category, 201);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $category = Category::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255'
+        ]);
+
+        $category->update($validated);
+
+        return response()->json($category);
+    }
 }
 

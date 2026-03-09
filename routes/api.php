@@ -15,5 +15,12 @@ Route::get('/categories/{id}/products', [CategoryController::class, 'products'])
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/products', [ProductController::class, 'index']);
+    Route::post('/products', [ProductController::class, 'addProduct']);
+    Route::put('/products/{id}', [ProductController::class, 'update']);
+
+    Route::post('/categories', [CategoryController::class, 'addCategory']);
+    Route::put('/categories/{id}', [CategoryController::class, 'update']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
+
 });
